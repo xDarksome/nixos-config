@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  hostname,
   username,
   ...
 }: {
@@ -14,10 +13,7 @@
     ./syncthing/mod.nix
   ];
 
-  networking = {
-    hostName = hostname;
-    networkmanager.enable = true;
-  };
+  networking.networkmanager.enable = true;
 
   i18n = {
     defaultLocale = "en_US.utf8";

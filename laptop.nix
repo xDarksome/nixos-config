@@ -1,13 +1,12 @@
 {
   lib,
-  config,
-  pkgs,
   inputs,
+  pkgs,
   username,
   ...
 }: {
   imports = [
-    ./_base.nix
+    ./machine.nix
 
     ./kmonad/mod.nix
     ./wezterm/mod.nix
@@ -34,10 +33,6 @@
   };
 
   security.polkit.enable = true;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   systemd.services."user@".serviceConfig.Delegate = ["cpu" "cpuset" "io" "memory" "pids"];
 

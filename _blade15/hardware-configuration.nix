@@ -12,7 +12,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usbhid"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
@@ -24,14 +24,14 @@
 
   boot.initrd.luks.devices."luks-bd6f0e62-d0af-4875-b12c-3d64466da5a3".device = "/dev/disk/by-uuid/bd6f0e62-d0af-4875-b12c-3d64466da5a3";
 
+  fileSystems."/home/darksome/steam" = {
+    device = "/dev/disk/by-uuid/1a85b68a-8c2e-4301-b50b-c91a4f8e0196";
+    fsType = "ext4";
+  };
+
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/2DE9-40D0";
     fsType = "vfat";
-  };
-
-  fileSystems."/home/darksome/steam" = {
-    device = "/dev/disk/by-path/pci-0000:03:00.0-nvme-1-part3";
-    fsType = "ext4";
   };
 
   swapDevices = [];
@@ -41,8 +41,12 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-740fab674ec6.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-a08aa890be9e.useDHCP = lib.mkDefault true;
+  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s20f0u2.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
