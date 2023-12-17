@@ -28,6 +28,14 @@
           inherit username inputs;
         };
       };
+
+      vps0 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [./_vps0/mod.nix];
+        specialArgs = {
+          inherit username inputs;
+        };
+      };
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
