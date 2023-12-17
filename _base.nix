@@ -8,6 +8,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
 
+    ./helix/mod.nix
     ./xplr/mod.nix
     ./syncthing/mod.nix
   ];
@@ -38,7 +39,6 @@
     unzip
 
     nushell
-    helix
     gitui
     bottom
   ];
