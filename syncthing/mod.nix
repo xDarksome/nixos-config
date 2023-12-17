@@ -1,4 +1,8 @@
-{ pkgs, username, ... }: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   services.syncthing = {
     enable = true;
     user = username;
@@ -6,11 +10,11 @@
     dataDir = "/home/${username}";
     settings = {
       folders = {
-         "/home/${username}/sync" = {
-           id = "default";
-           type = "sendreceive";
-           devices = ["pixel3"];
-         };
+        "/home/${username}/sync" = {
+          id = "default";
+          type = "sendreceive";
+          devices = ["pixel3"];
+        };
       };
       devices = {
         pixel3 = {

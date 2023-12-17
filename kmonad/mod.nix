@@ -1,15 +1,19 @@
-{ pkgs, inputs, ... }: {
-  imports = [ inputs.kmonad.nixosModules.default ];
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [inputs.kmonad.nixosModules.default];
 
   services.kmonad = {
-  	enable = true;
-  	keyboards = {
-  	  "razer-blade" = {
-  	    device = "/dev/input/by-id/usb-Razer_Razer_Blade-if01-event-kbd";
-  		defcfg = {
-  		  enable = true;
-  		  fallthrough = true;      	
-  		};
+    enable = true;
+    keyboards = {
+      "razer-blade" = {
+        device = "/dev/input/by-id/usb-Razer_Razer_Blade-if01-event-kbd";
+        defcfg = {
+          enable = true;
+          fallthrough = true;
+        };
         config = ''
 
           (defsrc
@@ -52,7 +56,7 @@
             lctl lmet _              spc            _    rctl left down rght
           )
         '';
-  		};
-  	};
+      };
+    };
   };
 }

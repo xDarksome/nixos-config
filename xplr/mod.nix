@@ -1,6 +1,9 @@
-{ pkgs, username, ... }:
 {
-  environment.systemPackages = with pkgs; [ xplr ];
+  pkgs,
+  username,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [xplr];
 
   home-manager.users.${username}.home.file = {
     ".config/xplr/init.lua".source = ./init.lua;

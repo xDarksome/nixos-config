@@ -1,8 +1,15 @@
-{ lib, config, pkgs, inputs, username, ... }: {
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  username,
+  ...
+}: {
   imports = [
     ./_base.nix
 
-    ./kmonad/mod.nix    
+    ./kmonad/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
   ];
@@ -32,10 +39,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  systemd.services."user@".serviceConfig.Delegate = [ "cpu" "cpuset" "io" "memory" "pids" ];
+  systemd.services."user@".serviceConfig.Delegate = ["cpu" "cpuset" "io" "memory" "pids"];
 
   networking.wireless = {
-    enable = false;  # Enables wireless support via wpa_supplicant.
+    enable = false; # Enables wireless support via wpa_supplicant.
     iwd.enable = true;
   };
 
@@ -53,44 +60,44 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "docker" ];
+    extraGroups = ["docker"];
   };
 
   users.users.docker = {
     isNormalUser = true;
-    extraGroups = [ "docker" ];
+    extraGroups = ["docker"];
   };
 
   environment.systemPackages = with pkgs; [
-     rust-analyzer
-     rustup
-    
-     brightnessctl
+    rust-analyzer
+    rustup
 
-     keepassxc
-     firefox
-     mullvad-browser
-     mullvad-vpn
-     chromium
-     tor-browser-bundle-bin
+    brightnessctl
 
-     pulsemixer
-     termusic
+    keepassxc
+    firefox
+    mullvad-browser
+    mullvad-vpn
+    chromium
+    tor-browser-bundle-bin
 
-	   mako   
-     sway
-     swaybg
-     swaylock
-     swayidle
-     grim # screenshot functionality
-     slurp # screenshot functionality
-     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-     swww
+    pulsemixer
+    termusic
 
-     logseq
+    mako
+    sway
+    swaybg
+    swaylock
+    swayidle
+    grim # screenshot functionality
+    slurp # screenshot functionality
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    swww
 
-     mpv
-     qbittorrent
+    logseq
+
+    mpv
+    qbittorrent
   ];
 
   services.pipewire = {
@@ -98,11 +105,11 @@
     alsa.enable = true;
     pulse.enable = true;
   };
-    
+
   services.dbus.enable = true;
-  
+
   virtualisation.docker = {
-  	enable = true;
+    enable = true;
   };
 
   fonts.packages = with pkgs; [
@@ -112,8 +119,7 @@
   hardware.opengl.enable = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.driSupport = true;
-  
+
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = false;
 }
-

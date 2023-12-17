@@ -1,4 +1,9 @@
-{ lib, pkgs, username, ... }: {
+{
+  lib,
+  pkgs,
+  username,
+  ...
+}: {
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -8,17 +13,17 @@
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
-  home-manager.users.${username} = { pkgs, ... }: {
-    wayland.windowManager.sway = 
-      let mod = "Mod4"; in
-    {
+  home-manager.users.${username} = {pkgs, ...}: {
+    wayland.windowManager.sway = let
+      mod = "Mod4";
+    in {
       enable = true;
       config = {
         modifier = mod;
-      
+
         left = "j";
         down = "k";
         up = "i";
@@ -41,36 +46,36 @@
         };
 
         keybindings = lib.mkOptionDefault {
-            "${mod}+Return" = "exec wezterm";
-            "${mod}+Escape" = "kill";
-            "${mod}+Tab" = "exec dmenu_path | dmenu | xargs swaymsg exec --";
+          "${mod}+Return" = "exec wezterm";
+          "${mod}+Escape" = "kill";
+          "${mod}+Tab" = "exec dmenu_path | dmenu | xargs swaymsg exec --";
 
-            "${mod}+u" = "exec swaylock";
+          "${mod}+u" = "exec swaylock";
 
-            "${mod}+a" = "workspace number 1";
-            "${mod}+s" = "workspace number 2";
-            "${mod}+d" = "workspace number 3";
-            "${mod}+f" = "workspace number 4";
-            "${mod}+w" = "workspace number 5";
-            "${mod}+e" = "workspace number 6";
-            "${mod}+r" = "workspace number 7";
+          "${mod}+a" = "workspace number 1";
+          "${mod}+s" = "workspace number 2";
+          "${mod}+d" = "workspace number 3";
+          "${mod}+f" = "workspace number 4";
+          "${mod}+w" = "workspace number 5";
+          "${mod}+e" = "workspace number 6";
+          "${mod}+r" = "workspace number 7";
 
-            "${mod}+Shift+a" = "move container to workspace number 1";
-            "${mod}+Shift+s" = "move container to workspace number 2";
-            "${mod}+Shift+d" = "move container to workspace number 3";
-            "${mod}+Shift+f" = "move container to workspace number 4";
-            "${mod}+Shift+w" = "move container to workspace number 5";
-            "${mod}+Shift+e" = "move container to workspace number 6";
-            "${mod}+Shift+r" = "move container to workspace number 7";
-          };
+          "${mod}+Shift+a" = "move container to workspace number 1";
+          "${mod}+Shift+s" = "move container to workspace number 2";
+          "${mod}+Shift+d" = "move container to workspace number 3";
+          "${mod}+Shift+f" = "move container to workspace number 4";
+          "${mod}+Shift+w" = "move container to workspace number 5";
+          "${mod}+Shift+e" = "move container to workspace number 6";
+          "${mod}+Shift+r" = "move container to workspace number 7";
+        };
 
-          bars = [
-            {
-              mode = "hide";
-              hiddenState = "hide";
-              statusCommand = "while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done";
-            }
-          ];
+        bars = [
+          {
+            mode = "hide";
+            hiddenState = "hide";
+            statusCommand = "while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done";
+          }
+        ];
       };
 
       extraConfigEarly = ''
@@ -80,7 +85,7 @@
       extraConfig = ''
         exec swww-daemon
         exec swww img sync/wallpapers/cyborg-girl-white.jpg
-      
+
         smart_borders on
         default_border pixel 1
         default_floating_border pixel 1

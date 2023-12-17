@@ -1,6 +1,6 @@
 {
   description = "NixOS configuration flake";
-  
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # cosmic-comp.url = "github:xDarksome/cosmic-comp/updated-upstream";
@@ -11,17 +11,26 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, kmonad, home-manager, ... }@inputs: 
-  let 
-    username = "darksome"; 
-  in
-  {
+  outputs = {
+    self,
+    nixpkgs,
+    kmonad,
+    home-manager,
+    ...
+  } @ inputs: let
+    username = "darksome";
+  in {
     nixosConfigurations = {
       blade15 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./razer-blade15.nix ./_pc.nix ];
-        specialArgs = { inherit username inputs; hostname = "blade15"; };
+        modules = [./razer-blade15.nix ./_pc.nix];
+        specialArgs = {
+          inherit username inputs;
+          hostname = "blade15";
+        };
       };
     };
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }

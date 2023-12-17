@@ -1,4 +1,10 @@
-{ pkgs, inputs, hostname, username, ... }: {
+{
+  pkgs,
+  inputs,
+  hostname,
+  username,
+  ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
 
@@ -13,28 +19,28 @@
 
   i18n = {
     defaultLocale = "en_US.utf8";
-    supportedLocales = [ "en_US.UTF-8/UTF-8" "unm_US/UTF-8" ]; 
+    supportedLocales = ["en_US.UTF-8/UTF-8" "unm_US/UTF-8"];
   };
 
   services.openssh.enable = true;
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   environment.systemPackages = with pkgs; [
-     unixtools.whereis
-     wget
-     git
-     gnupg
-     zip
-     unzip
+    unixtools.whereis
+    wget
+    git
+    gnupg
+    zip
+    unzip
 
-     nushell
-     helix
-     gitui
-     bottom
+    nushell
+    helix
+    gitui
+    bottom
   ];
 
   nix = {
