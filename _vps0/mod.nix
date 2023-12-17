@@ -5,4 +5,6 @@
     enable = true;
     device = "/dev/sda";
   };
+
+  networking.hostName = "vps0";
 }
