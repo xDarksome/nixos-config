@@ -30,12 +30,16 @@
   environment.systemPackages = with pkgs; [
     unixtools.whereis
     wget
-    git
-    gnupg
     zip
     unzip
 
+    git
     gitui
+
+    gnupg
+    gpg-tui
+    pinentry-curses
+
     bottom
   ];
 

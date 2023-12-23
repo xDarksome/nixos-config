@@ -14,8 +14,6 @@
   ];
 
   services = {
-    pcscd.enable = true;
-
     mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
@@ -23,12 +21,6 @@
   };
 
   programs = {
-    gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-      enableSSHSupport = true;
-    };
-
     steam.enable = true;
   };
 
