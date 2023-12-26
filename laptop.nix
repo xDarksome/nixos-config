@@ -68,6 +68,8 @@
     chromium
     tor-browser-bundle-bin
 
+    session-desktop
+
     pulsemixer
     termusic
 
