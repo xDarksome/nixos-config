@@ -15,11 +15,6 @@
 
   networking.hostName = "blade15";
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;

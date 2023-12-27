@@ -18,7 +18,6 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    blueman.enable = true;
   };
 
   programs = {
