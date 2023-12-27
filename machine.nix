@@ -40,6 +40,8 @@
     gpg-tui
     pinentry-curses
 
+    dua
+
     bottom
   ];
 
