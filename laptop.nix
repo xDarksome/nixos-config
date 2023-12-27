@@ -8,7 +8,7 @@
   imports = [
     ./machine.nix
 
-    ./kmonad/mod.nix
+    ./xremap/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
   ];
