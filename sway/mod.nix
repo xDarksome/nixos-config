@@ -33,9 +33,15 @@
         #   bg = "~/sync/wallpapers/cyborg-girl-white.jpg fit";
         # };
 
+        # Logitech G502 ID doesn't work for some reason, so it's hacked by setting wildcard and then
+        # ovewriting for everything else.
         input = {
-          "1133:16511:Logitech_G502" = {
+          "*" = {
             accel_profile = "flat";
+            pointer_accel = "0.0";
+          };
+          "1133:16495:Logitech_MX_Ergo" = {
+            accel_profile = "adaptive";
           };
           "type:keyboard" = {
             "repeat_delay" = "200";

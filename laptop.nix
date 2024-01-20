@@ -8,27 +8,20 @@
   imports = [
     ./machine.nix
 
-    ./kmonad/mod.nix
+    ./xremap/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
   ];
 
   services = {
-    pcscd.enable = true;
-
     mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+    blueman.enable = true;
   };
 
   programs = {
-    gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-      enableSSHSupport = true;
-    };
-
     steam.enable = true;
   };
 
@@ -75,6 +68,8 @@
     mullvad-vpn
     chromium
     tor-browser-bundle-bin
+
+    session-desktop
 
     pulsemixer
     termusic

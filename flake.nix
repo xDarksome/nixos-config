@@ -6,15 +6,16 @@
     # cosmic-comp.url = "github:xDarksome/cosmic-comp/updated-upstream";
     # cosmic-comp.inputs.nixpkgs.follows = "nixpkgs";
     # cosmic-launcher.url = "github:xDarksome/cosmic-launcher";
-    kmonad.url = "github:kmonad/kmonad?dir=nix";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    xremap-flake.url = "github:xremap/nix-flake";
+    xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
-    kmonad,
     home-manager,
     ...
   } @ inputs: let
