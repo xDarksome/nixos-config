@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ./machine.nix
   ];
@@ -8,6 +12,9 @@
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
+
+      ClientAliveInterval = 60;
+      ClientAliveCountMax = 30;
     };
   };
 

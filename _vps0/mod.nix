@@ -1,5 +1,9 @@
-{pkgs, ...}: {
-  imports = [./hardware-configuration.nix ../vps.nix];
+{
+  pkgs,
+  username,
+  ...
+}: {
+  imports = [./hardware-configuration.nix ../vps.nix ../bitcoind/mod.nix ../electrs/mod.nix];
 
   boot.loader.grub = {
     enable = true;
@@ -22,4 +26,6 @@
     enable = true;
     allowedTCPPorts = [443];
   };
+
+  environment.systemPackages = with pkgs; [electrs];
 }
