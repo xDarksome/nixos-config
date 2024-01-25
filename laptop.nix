@@ -3,6 +3,7 @@
   inputs,
   pkgs,
   username,
+  appimageTools,
   ...
 }: {
   imports = [
@@ -18,10 +19,12 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+    udev.packages = with pkgs; [ bazecor ];
   };
 
   programs = {
     steam.enable = true;
+    virt-manager.enable = true;
   };
 
   security.polkit.enable = true;
@@ -47,7 +50,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["docker"];
+    extraGroups = ["docker" "libvirtd"];
   };
 
   users.users.docker = {
@@ -87,6 +90,8 @@
 
     mpv
     qbittorrent
+
+    (bazecor.overrideAttrs { version = "1.3.10-rc.2"; })
   ];
 
   services.pipewire = {
@@ -100,6 +105,7 @@
   virtualisation.docker = {
     enable = true;
   };
+  virtualisation.libvirtd.enable = true;
 
   fonts.packages = with pkgs; [
     fira-code
