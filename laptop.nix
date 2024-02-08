@@ -12,6 +12,8 @@
     ./xremap/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
+
+    ./nix-bitcoin/mod.nix
   ];
 
   services = {
@@ -19,7 +21,7 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    udev.packages = with pkgs; [ bazecor ];
+    udev.packages = with pkgs; [bazecor];
   };
 
   programs = {
@@ -91,7 +93,12 @@
     mpv
     qbittorrent
 
-    (bazecor.overrideAttrs { version = "1.3.10-rc.2"; })
+    electrum
+    monero-gui
+
+    flameshot
+
+    (bazecor.overrideAttrs {version = "1.3.10-rc.2";})
   ];
 
   services.pipewire = {

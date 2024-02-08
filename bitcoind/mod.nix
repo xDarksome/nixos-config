@@ -20,11 +20,9 @@
 
   home-manager.users.${username}.home.file = {
     ".bitcoin/bitcoin.conf".text = ''
-      blocksdir=/home/${username}/bitcoin-blockchain
       server=1
-      txindex=0
+      txindex=1
       prune=0
-      dbcache=2048
     '';
   };
 }
