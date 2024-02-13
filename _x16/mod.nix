@@ -11,8 +11,13 @@
       canTouchEfiVariables = true;
     };
   };
+  # boot.kernelPackages = pkgs.linuxPackages_6_6;
 
-  networking.hostName = "blade15";
+  networking.hostName = "x16";
+
+  services.asusd.enable = true;
+
+  environment.systemPackages = with pkgs; [asusctl];
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -47,8 +52,8 @@
       };
 
       # Make sure to use the correct Bus ID values for your system!
-      intelBusId = "PCI:0:0:2";
-      nvidiaBusId = "PCI:0:1:0";
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
     };
   };
 }

@@ -9,7 +9,7 @@
   imports = [
     ./machine.nix
 
-    ./xremap/mod.nix
+    ./kanata/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
 
@@ -97,6 +97,8 @@
     monero-gui
 
     flameshot
+
+    kanata
 
     (bazecor.overrideAttrs {version = "1.3.10-rc.2";})
   ];

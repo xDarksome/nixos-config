@@ -24,9 +24,9 @@
     username = "darksome";
   in {
     nixosConfigurations = {
-      blade15 = nixpkgs.lib.nixosSystem {
+      x16 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [./_blade15/mod.nix];
+        modules = [./_x16/mod.nix];
         specialArgs = {
           inherit username inputs;
         };

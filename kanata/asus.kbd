@@ -1,0 +1,91 @@
+;;(defcfg
+;;  linux-dev /dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd
+;;)
+
+(defsrc
+  tab  q    w    e    r    t    y    u    i    o    p 
+  caps a    s    d    f    g    h    j    k    l    ;
+  lsft z    x    c    v    b    n    m    ,    .    /
+
+  lctl lmet lalt           spc            ralt rctl
+)
+
+;; multi f24 hack: https://github.com/jtroo/kanata/discussions/422
+(defalias
+  bc (multi f24 (tap-hold-press 200 200 bspc lctl))
+  ss (multi f24 (tap-hold-press 200 200 spc  (layer-toggle sym)))
+  es (multi f24 (tap-hold-press 200 200 esc  lsft))
+
+  tm (multi f24 (tap-hold-press 200 200 tab lmet))
+  ra (multi f24 (tap-hold-press 200 200 ret ralt))
+
+  : S-;
+  _ S--
+  ? S-/
+  + S-=
+  | S-\
+  qo S-'
+  ~ S-`
+
+  ! S-1
+  @ S-2
+  # S-3
+  $ S-4
+  % S-5
+  ^ S-6
+  & S-7
+  * S-8
+  pl S-9
+  pr S-0
+
+  { S-[
+  } S-]
+  < S-,
+  > S-.
+
+  num (layer-toggle num)
+  nav (layer-toggle nav)
+
+  l0 (layer-switch main)
+  l1 (layer-switch engram)
+)
+
+(deflayer main
+  del  q    w    e    r    t    y    u    i    o    p
+  tab  a    s    d    f    g    h    j    k    l    ;
+  lsft z    x    c    v    b    n    m    ,    .    /
+
+  @l1  @tm  @es           @ss            @bc  @ra
+)
+
+(deflayer engram
+  del  b    y    o    u    '    @?   l    d    w    v
+  tab  c    i    e    a    .    ,    h    t    s    n
+  g    x    j    k    z    _    q    r    m    f    p
+
+  @l0   _     _            _              _    _
+)
+
+(deflayer sym
+  _    `    @:   =    @$   @%   @^   @&   @*   @#   del
+  _    @qo  ;    -    @_   _    @!   @pl  @{   @<   [
+  @~   @|   @+   /    \    b    @@   @pr  @}   @>   ]
+
+  _     _    @nav          _              @num _
+)
+
+(deflayer nav
+  _    _    _    _    _    _    _    pgdn up    pgup _
+  _    lalt lmet lsft lctl _    home lft  down  rght end
+  _    _    _    _    _    _    _    _    _    _     _
+
+  _    _    _             _              _    _
+)
+
+(deflayer num
+  _    _    1    2    3    _    _    _    _    _    _
+  _    0    4    5    6    _    _    rctl rsft rmet ralt
+  _    7    8    9    _    _    _    _    _    _    _
+
+  _    _    _             _              _    _
+)
