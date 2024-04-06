@@ -24,10 +24,10 @@
       config = {
         modifier = mod;
 
-        left = "j";
-        down = "k";
-        up = "i";
-        right = "l";
+        left = "h";
+        down = "t";
+        up = "d";
+        right = "s";
 
         # output."*" = {
         #   bg = "~/sync/wallpapers/cyborg-girl-white.jpg fit";
@@ -44,35 +44,37 @@
             accel_profile = "adaptive";
           };
           "type:keyboard" = {
-            "repeat_delay" = "200";
+            "repeat_delay" = "300";
             "repeat_rate" = "30";
             "xkb_layout" = "us,ru";
             "xkb_options" = "grp:win_space_toggle";
           };
         };
 
-        keybindings = lib.mkOptionDefault {
+        keybindings = {
           "${mod}+Return" = "exec wezterm";
           "${mod}+Escape" = "kill";
           "${mod}+Tab" = "exec dmenu_path | dmenu | xargs swaymsg exec --";
 
-          "${mod}+u" = "exec swaylock";
+          "${mod}+l" = "exec swaylock";
 
-          "${mod}+a" = "workspace number 1";
-          "${mod}+s" = "workspace number 2";
-          "${mod}+d" = "workspace number 3";
-          "${mod}+f" = "workspace number 4";
-          "${mod}+w" = "workspace number 5";
-          "${mod}+e" = "workspace number 6";
-          "${mod}+r" = "workspace number 7";
+          "${mod}+c" = "workspace number 1";
+          "${mod}+i" = "workspace number 2";
+          "${mod}+e" = "workspace number 3";
+          "${mod}+a" = "workspace number 4";
+          "${mod}+b" = "workspace number 5";
+          "${mod}+y" = "workspace number 6";
+          "${mod}+o" = "workspace number 7";
+          "${mod}+u" = "workspace number 8";
 
-          "${mod}+Shift+a" = "move container to workspace number 1";
-          "${mod}+Shift+s" = "move container to workspace number 2";
-          "${mod}+Shift+d" = "move container to workspace number 3";
-          "${mod}+Shift+f" = "move container to workspace number 4";
-          "${mod}+Shift+w" = "move container to workspace number 5";
-          "${mod}+Shift+e" = "move container to workspace number 6";
-          "${mod}+Shift+r" = "move container to workspace number 7";
+          "${mod}+Shift+c" = "move container to workspace number 1";
+          "${mod}+Shift+i" = "move container to workspace number 2";
+          "${mod}+Shift+e" = "move container to workspace number 3";
+          "${mod}+Shift+a" = "move container to workspace number 4";
+          "${mod}+Shift+b" = "move container to workspace number 5";
+          "${mod}+Shift+y" = "move container to workspace number 6";
+          "${mod}+Shift+o" = "move container to workspace number 7";
+          "${mod}+Shift+u" = "move container to workspace number 8";
         };
 
         bars = [

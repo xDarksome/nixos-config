@@ -8,6 +8,7 @@
     inputs.home-manager.nixosModules.home-manager
 
     ./nushell/mod.nix
+    ./gitui/mod.nix
     ./helix/mod.nix
     ./xplr/mod.nix
     ./syncthing/mod.nix
@@ -34,7 +35,6 @@
     unzip
 
     git
-    gitui
 
     gnupg
     gpg-tui

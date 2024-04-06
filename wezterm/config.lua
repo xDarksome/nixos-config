@@ -10,7 +10,7 @@ config.window_close_confirmation = 'NeverPrompt'
 config.color_scheme = 'GitHub Dark'
 
 config.font = wezterm.font 'Fira Code'
-config.font_size = 16.0
+config.font_size = 18.0
 config.line_height = 1.1
 
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }

@@ -12,12 +12,18 @@
 
 ;; multi f24 hack: https://github.com/jtroo/kanata/discussions/422
 (defalias
-  bc (multi f24 (tap-hold-press 200 200 bspc lctl))
-  ss (multi f24 (tap-hold-press 200 200 spc  (layer-toggle sym)))
-  es (multi f24 (tap-hold-press 200 200 esc  lsft))
+  lm (one-shot 300 lmet)
+  la (one-shot 300 lalt)
+  lc (one-shot 300 lctl)
+  ls (one-shot 300 lsft)
 
-  tm (multi f24 (tap-hold-press 200 200 tab lmet))
-  ra (multi f24 (tap-hold-press 200 200 ret ralt))
+  ss (multi f24 (tap-hold-press 200 200 spc (layer-toggle sym)))
+  na (one-shot 300 (layer-toggle nav)) 
+
+  rm (one-shot 300 rmet)
+  ra (one-shot 300 ralt)
+  rc (one-shot 300 rctl)
+  rs (one-shot 300 rsft)
 
   : S-;
   _ S--
@@ -43,7 +49,6 @@
   < S-,
   > S-.
 
-  num (layer-toggle num)
   nav (layer-toggle nav)
 
   l0 (layer-switch main)
@@ -55,37 +60,29 @@
   tab  a    s    d    f    g    h    j    k    l    ;
   lsft z    x    c    v    b    n    m    ,    .    /
 
-  @l1  @tm  @es           @ss            @bc  @ra
+  @l1  @lm  @lc           @ss            @rs  @na
 )
 
 (deflayer engram
-  del  b    y    o    u    '    @?   l    d    w    v
-  tab  c    i    e    a    .    ,    h    t    s    n
-  g    x    j    k    z    _    q    r    m    f    p
+  XX   b    y    o    u    esc  bspc l    d    w    v
+  XX   c    i    e    a    tab  ret  h    t    s    n
+  g    x    j    k    z    XX   q    r    m    f    p
 
-  @l0   _     _            _              _    _
+  @l0  @lm  @lc           @ss            @rs  @na
 )
 
 (deflayer sym
-  _    `    @:   =    @$   @%   @^   @&   @*   @#   del
-  _    @qo  ;    -    @_   _    @!   @pl  @{   @<   [
-  @~   @|   @+   /    \    b    @@   @pr  @}   @>   ]
+  XX   \    @*   -    @+   @@   @#   ;    @:   @qo  @!
+  XX   /    @&   =    @_   `    @|   ,    .    '    @?
+  [    @<   @{  @pl   @$   XX   @%   @pr  @}   @>   ]
 
-  _     _    @nav          _              @num _
+  _    @lm  @lc           @ss            @rs  @na
 )
 
 (deflayer nav
-  _    _    _    _    _    _    _    pgdn up    pgup _
-  _    lalt lmet lsft lctl _    home lft  down  rght end
-  _    _    _    _    _    _    _    _    _    _     _
+  XX   5    6    7    8    9    del  pgdn up    pgup ins
+  XX   0    1    2    3    4    home lft  down  rght end
+  @lm  @la  @lc  @ls  .    XX   @^   @rs  @rc   @ra  @rm
 
-  _    _    _             _              _    _
-)
-
-(deflayer num
-  _    _    1    2    3    _    _    _    _    _    _
-  _    0    4    5    6    _    _    rctl rsft rmet ralt
-  _    7    8    9    _    _    _    _    _    _    _
-
-  _    _    _             _              _    _
+  _    @lm  @lc           @ss            @rs  @na
 )

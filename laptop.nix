@@ -21,7 +21,7 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    udev.packages = with pkgs; [bazecor];
+    udev.packages = with pkgs; [bazecor android-udev-rules];
   };
 
   programs = {
@@ -101,6 +101,20 @@
     kanata
 
     (bazecor.overrideAttrs {version = "1.3.10-rc.2";})
+
+    (looking-glass-client.overrideAttrs {
+      src = fetchFromGitHub {
+        owner = "gnif";
+        repo = "LookingGlass";
+        rev = "B6-rc1";
+        sha256 = "sha256-FZjwLY2XtPGhwc/GyAAH2jvFOp61lSqXqXjz0UBr7uw=";
+        fetchSubmodules = true;
+      };
+    })
+
+    # virt manager is broken without this
+    gnome3.adwaita-icon-theme # default gnome cursors
+    glib
   ];
 
   services.pipewire = {
@@ -114,7 +128,19 @@
   virtualisation.docker = {
     enable = true;
   };
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.verbatimConfig = ''
+      cgroup_device_acl = [
+          "/dev/null", "/dev/full", "/dev/zero",
+          "/dev/random", "/dev/urandom",
+          "/dev/ptmx", "/dev/kvm", "/dev/kqemu",
+          "/dev/rtc","/dev/hpet", "/dev/vfio/vfio",
+
+          "/dev/kvmfr0"
+      ]
+    '';
+  };
 
   fonts.packages = with pkgs; [
     fira-code
