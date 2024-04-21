@@ -65,6 +65,7 @@
     rustup
 
     brightnessctl
+    zoxide
 
     keepassxc
     firefox
@@ -100,7 +101,27 @@
 
     kanata
 
-    (bazecor.overrideAttrs {version = "1.3.10-rc.2";})
+    (bazecor.overrideAttrs {
+     src = pkgs.appimageTools.extract {
+        pname = "bazecor";
+        version = "1.4.0-rc.3";
+
+        src = fetchurl {
+          url = "https://github.com/Dygmalab/Bazecor/releases/download/v1.4.0-rc.3/Bazecor-1.4.0-rc.3-x64.AppImage";
+          hash = "sha256-ojAVBNSknOvh8L4dqkoxHw3aYoWr0Wb81kVptNVCC3o=";
+        };
+
+        # Workaround for https://github.com/Dygmalab/Bazecor/issues/370
+        postExtract = ''
+          substituteInPlace \
+            $out/usr/lib/bazecor/resources/app/.webpack/main/index.js \
+            --replace \
+              'checkUdev=()=>{try{if(c.default.existsSync(f))return c.default.readFileSync(f,"utf-8").trim()===l.trim()}catch(e){console.error(e)}return!1}' \
+              'checkUdev=()=>{return 1}'
+        '';
+      };           
+      
+    })
 
     (looking-glass-client.overrideAttrs {
       src = fetchFromGitHub {

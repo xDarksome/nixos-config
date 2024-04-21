@@ -7,8 +7,6 @@ hidden = false
 insert = "bar"
 
 [keys.normal]
-c = "goto_first_nonwhitespace"
-
 o = "goto_prev_paragraph"
 e = "goto_next_paragraph"
 i = "move_prev_word_start"
@@ -19,49 +17,59 @@ d = "move_line_up"
 h = "move_char_left"
 s = "move_char_right"
 
-n = "goto_line_end"
+y = "goto_first_nonwhitespace"
+u = "goto_line_end"
 
-l = "change_selection"
-k = ":clipboard-yank"
-r = ":clipboard-paste-after"
-")" = ":clipboard-paste-replace"
-"backspace" = "delete_selection"
-"j" = [":clipboard-yank", "delete_selection"]
-P = "select_regex"
+"*" = "goto_file_start"
+"@" = "goto_last_line"
 
-b = "select_mode"
+l = "insert_mode"
+w = "append_mode"
 
-q = "collapse_selection"
-"%" = "keep_primary_selection"
+space = "select_mode"
+esc = ":write"
 
-z = "search_next"
-"$" = "search_prev"
-
-y = "insert_mode"
-# A = "insert_at_line_start"
-
-
-u = "undo"
-"+" = "redo"
-
-
-"tab" = "goto_definition"
-v = "command_mode"
-
-D = "jump_forward"
-T = "jump_backward"
-
+c = "change_selection"
+j = ":clipboard-yank"
+k = ":clipboard-paste-after"
+"(" = ":clipboard-paste-replace"
+K = ":clipboard-paste-replace"
+backspace = "delete_selection"
+x = [":clipboard-yank", "delete_selection"]
+g = "undo"
+G = "redo"
 
 "p" = "search"
+"P" = "global_search"
 
-w = "append_mode"
-# ":" = "insert_at_line_end"
+# shared
 
+"tab" = "indent"
+"S-tab" = "unindent"
 "ret" = ["add_newline_below", "move_line_down"]
-# S-ret = ["add_newline_above", "move_line_up"]
+
+">" = "search_next"
+")" = "search_prev"
+
+"v" = "command_mode"
+
+n = "goto_definition"
+f = "jump_forward"
+r = "jump_backward"
+
+"," = "file_picker"
+"H" = "file_picker_in_current_directory"
+
+"=" = "code_action"
+"}" = "rename_symbol"
+"?" = "last_picker"
+":" = "diagnostics_picker"
+D = "workspace_diagnostics_picker"
+"q" = ":quit"
+"C-q" = ":q!"
 
 [keys.select]
-c = "extend_to_line_start"
+y = "extend_to_line_start"
 
 o = "extend_line_above"
 e = "extend_line_below"
@@ -73,17 +81,52 @@ d = "extend_line_up"
 h = "extend_char_left"
 s = "extend_char_right"
 
-n = "extend_to_line_end"
+u = "extend_to_line_end"
 
-l = "change_selection"
-k = [":clipboard-yank", "normal_mode", "collapse_selection"]
-r = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
-"backspace" = ["delete_selection", "normal_mode"]
-j = [":clipboard-yank", "delete_selection", "normal_mode"]
+"*" = "select_all"
+"@" = "select_all"
+
+c = "change_selection"
+j = [":clipboard-yank", "normal_mode", "collapse_selection"]
+k = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
+"(" = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
+K = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
+backspace = ["delete_selection", "normal_mode"]
+x = [":clipboard-yank", "delete_selection", "normal_mode"]
 p = ["select_regex", "normal_mode"]
+space = ["normal_mode", "collapse_selection"]
 
-[keys.normal.space]
-Q = ":quit!"
-q = ":quit"
-s = ":write"
-S = ":wq"
+# shared
+
+"tab" = "indent"
+"S-tab" = "unindent"
+"ret" = ["add_newline_below", "move_line_down"]
+
+">" = "search_next"
+")" = "search_prev"
+
+"v" = "command_mode"
+
+n = "goto_definition"
+f = "jump_forward"
+r = "jump_backward"
+
+"," = "file_picker"
+"H" = "file_picker_in_current_directory"
+
+"=" = "code_action"
+"}" = "rename_symbol"
+"?" = "last_picker"
+":" = "diagnostics_picker"
+D = "workspace_diagnostics_picker"
+"q" = ":quit"
+"C-q" = ":q!"
+
+[keys.insert]
+esc = ["normal_mode", ":write"]
+
+[keys.normal.b]
+i = "goto_implementation"
+d = "goto_definition"
+t = "goto_type_definition"
+r = "goto_reference"

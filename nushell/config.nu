@@ -527,7 +527,13 @@ $env.config = {
 alias kp = keepassxc-cli
 alias dev = nix develop --command "nu"
 alias gu = gitui
+alias ga = git add -A
+alias gc = git commit -m
+
 alias f = xplr
 alias bm = btm
 
 alias zspotify = docker run -v /home/darksome/.zspotify:/root/.zspotify -v /home/darksome/sync/music:/root/Music -it zspotify:local -md /root/Music
+
+source ~/.config/nushell/zoxide.nu
+alias cd = __zoxide_z

@@ -52,30 +52,42 @@
         };
 
         keybindings = {
-          "${mod}+Return" = "exec wezterm";
-          "${mod}+Escape" = "kill";
-          "${mod}+Tab" = "exec dmenu_path | dmenu | xargs swaymsg exec --";
+          "${mod}+h" = "focus left";
+          "${mod}+s" = "focus right";
+          "${mod}+d" = "focus up";
+          "${mod}+m" = "focus down";
 
-          "${mod}+l" = "exec swaylock";
+          "${mod}+Alt+h" = "move left";
+          "${mod}+Alt+s" = "move right";
+          "${mod}+Alt+d" = "move up";
+          "${mod}+Alt+m" = "move down";
+          
+          "${mod}+n" = "exec wezterm";
+          "${mod}+b" = "kill";
+          "${mod}+c" = "exec dmenu_path | dmenu | xargs swaymsg exec --";
 
-          "${mod}+c" = "workspace number 1";
-          "${mod}+i" = "workspace number 2";
-          "${mod}+e" = "workspace number 3";
-          "${mod}+a" = "workspace number 4";
-          "${mod}+b" = "workspace number 5";
-          "${mod}+y" = "workspace number 6";
-          "${mod}+o" = "workspace number 7";
-          "${mod}+u" = "workspace number 8";
+          "${mod}+l" = "exec swaylock -i sync/wallpapers/cyborg-girl-white.jpg";
 
-          "${mod}+Shift+c" = "move container to workspace number 1";
-          "${mod}+Shift+i" = "move container to workspace number 2";
-          "${mod}+Shift+e" = "move container to workspace number 3";
-          "${mod}+Shift+a" = "move container to workspace number 4";
-          "${mod}+Shift+b" = "move container to workspace number 5";
-          "${mod}+Shift+y" = "move container to workspace number 6";
-          "${mod}+Shift+o" = "move container to workspace number 7";
-          "${mod}+Shift+u" = "move container to workspace number 8";
-        };
+          "${mod}+y" = "workspace number 1";
+          "${mod}+o" = "workspace number 2";
+          "${mod}+u" = "workspace number 3";
+          "${mod}+i" = "workspace number 4";
+          "${mod}+e" = "workspace number 5";
+          "${mod}+a" = "workspace number 6";
+          "${mod}+x" = "workspace number 7";
+          "${mod}+j" = "workspace number 8";
+          "${mod}+k" = "workspace number 9";
+
+          "${mod}+Alt+y" = "move container to workspace number 1";
+          "${mod}+Alt+o" = "move container to workspace number 2";
+          "${mod}+Alt+u" = "move container to workspace number 3";
+          "${mod}+Alt+i" = "move container to workspace number 4";
+          "${mod}+Alt+e" = "move container to workspace number 5";
+          "${mod}+Alt+a" = "move container to workspace number 6";
+          "${mod}+Alt+x" = "move container to workspace number 7";
+          "${mod}+Alt+j" = "move container to workspace number 8";
+          "${mod}+Alt+k" = "move container to workspace number 9";
+       };
 
         bars = [
           {
