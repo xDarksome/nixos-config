@@ -14,14 +14,25 @@
     ./sway/mod.nix
 
     ./nix-bitcoin/mod.nix
+
+    ./cosmic/mod.nix
   ];
+
+  boot.supportedFilesystems = ["ntfs"];
 
   services = {
     mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    udev.packages = with pkgs; [bazecor android-udev-rules];
+    udev.packages = with pkgs; [
+      # bazecor 
+      android-udev-rules
+    ]; 
+    udev.extraRules = ''
+      KERNEL=="hidraw*", ATTRS{idVendor}=="d13e", ATTRS{idProduct}=="cc10", GROUP="plugdev", MODE="0666", SYMLINK+="coldcard"
+    '';
+    blueman.enable = true;
   };
 
   programs = {
@@ -32,11 +43,28 @@
   security.polkit.enable = true;
 
   systemd.services."user@".serviceConfig.Delegate = ["cpu" "cpuset" "io" "memory" "pids"];
+  systemd.user.services."stalker" = {
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "/home/${username}/.cargo/bin/stalker-bin";
+    };
+    environment = {
+      RUST_LOG = "info,sqlx=warn";
+      DATA_DIR = "/home/${username}/stalker-data";
+    };
+  };
 
   networking.wireless = {
     enable = false; # Enables wireless support via wpa_supplicant.
     iwd.enable = true;
   };
+
+  networking.firewall = {
+    enable = true;   
+    allowedTCPPorts = [ 6666 ];
+    allowedUDPPorts = [ 3000 3010 ];
+  };
+  networking.nftables.enable = true;
 
   services.xserver = {
     layout = "us,ru";
@@ -77,7 +105,7 @@
     session-desktop
 
     pulsemixer
-    termusic
+    # termusic
 
     mako
     sway
@@ -101,37 +129,37 @@
 
     kanata
 
-    (bazecor.overrideAttrs {
-     src = pkgs.appimageTools.extract {
-        pname = "bazecor";
-        version = "1.4.0-rc.3";
+    # (bazecor.overrideAttrs {
+    #  src = pkgs.appimageTools.extract {
+    #     pname = "bazecor";
+    #     version = "1.4.0-rc.3";
 
-        src = fetchurl {
-          url = "https://github.com/Dygmalab/Bazecor/releases/download/v1.4.0-rc.3/Bazecor-1.4.0-rc.3-x64.AppImage";
-          hash = "sha256-ojAVBNSknOvh8L4dqkoxHw3aYoWr0Wb81kVptNVCC3o=";
-        };
+    #     src = fetchurl {
+    #       url = "https://github.com/Dygmalab/Bazecor/releases/download/v1.4.0-rc.3/Bazecor-1.4.0-rc.3-x64.AppImage";
+    #       hash = "sha256-ojAVBNSknOvh8L4dqkoxHw3aYoWr0Wb81kVptNVCC3o=";
+    #     };
 
-        # Workaround for https://github.com/Dygmalab/Bazecor/issues/370
-        postExtract = ''
-          substituteInPlace \
-            $out/usr/lib/bazecor/resources/app/.webpack/main/index.js \
-            --replace \
-              'checkUdev=()=>{try{if(c.default.existsSync(f))return c.default.readFileSync(f,"utf-8").trim()===l.trim()}catch(e){console.error(e)}return!1}' \
-              'checkUdev=()=>{return 1}'
-        '';
-      };           
+    #     # Workaround for https://github.com/Dygmalab/Bazecor/issues/370
+    #     postExtract = ''
+    #       substituteInPlace \
+    #         $out/usr/lib/bazecor/resources/app/.webpack/main/index.js \
+    #         --replace \
+    #           'checkUdev=()=>{try{if(c.default.existsSync(f))return c.default.readFileSync(f,"utf-8").trim()===l.trim()}catch(e){console.error(e)}return!1}' \
+    #           'checkUdev=()=>{return 1}'
+    #     '';
+    #   };           
       
-    })
+    # })
 
-    (looking-glass-client.overrideAttrs {
-      src = fetchFromGitHub {
-        owner = "gnif";
-        repo = "LookingGlass";
-        rev = "B6-rc1";
-        sha256 = "sha256-FZjwLY2XtPGhwc/GyAAH2jvFOp61lSqXqXjz0UBr7uw=";
-        fetchSubmodules = true;
-      };
-    })
+    # (looking-glass-client.overrideAttrs {
+    #   src = fetchFromGitHub {
+    #     owner = "gnif";
+    #     repo = "LookingGlass";
+    #     rev = "B6-rc1";
+    #     sha256 = "sha256-FZjwLY2XtPGhwc/GyAAH2jvFOp61lSqXqXjz0UBr7uw=";
+    #     fetchSubmodules = true;
+    #   };
+    # })
 
     # virt manager is broken without this
     gnome3.adwaita-icon-theme # default gnome cursors
@@ -169,7 +197,6 @@
 
   hardware.opengl.enable = true;
   hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.driSupport = true;
 
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = false;

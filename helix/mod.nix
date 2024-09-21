@@ -3,6 +3,7 @@
   username,
   ...
 }: {
+
   environment.systemPackages = with pkgs; [helix];
 
   home-manager.users.${username}.home.file = {

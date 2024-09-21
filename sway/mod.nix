@@ -49,6 +49,12 @@
             "xkb_layout" = "us,ru";
             "xkb_options" = "grp:win_space_toggle";
           };
+          "type:touch" = {
+            "events" = "disabled";
+          };
+          "type:touchpad" = {
+            "events" = "enabled";
+          };
         };
 
         keybindings = {

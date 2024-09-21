@@ -3,6 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-cosmic = {
+      url = "github:xDarksome/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wezterm = {url = "github:wez/wezterm?dir=nix"; inputs.nixpkgs.follows = "nixpkgs";};
     # cosmic-comp.url = "github:xDarksome/cosmic-comp/updated-upstream";
     # cosmic-comp.inputs.nixpkgs.follows = "nixpkgs";
     # cosmic-launcher.url = "github:xDarksome/cosmic-launcher";

@@ -3,27 +3,22 @@
 ;;)
 
 (defsrc
-  tab  q    w    e    r    t    y    u    i    o    p 
-  caps a    s    d    f    g    h    j    k    l    ;
+  tab  q    w    e    r    t    y    u    i    o    p    [
+  caps a    s    d    f    g    h    j    k    l    ;    '
   lsft z    x    c    v    b    n    m    ,    .    /
 
-  lctl lmet lalt           spc            ralt rctl
+      lmet lalt           spc            ralt rctl
 )
 
 ;; multi f24 hack: https://github.com/jtroo/kanata/discussions/422
 (defalias
-  lm (one-shot 300 lmet)
-  la (one-shot 300 lalt)
-  lc (one-shot 300 lctl)
-  ls (one-shot 300 lsft)
+  t1 (multi f24 (tap-hold-press 200 200 tab lmet))
+  t2 (multi f24 (tap-hold-press 200 200 spc (layer-toggle nav)))
+  t3 (multi f24 (tap-hold-press 200 200 del lctl))
 
-  ss (multi f24 (tap-hold-press 200 200 spc (layer-toggle sym)))
-  na (one-shot 300 (layer-toggle nav)) 
-
-  rm (one-shot 300 rmet)
-  ra (one-shot 300 ralt)
-  rc (one-shot 300 rctl)
-  rs (one-shot 300 rsft)
+  t4 (multi f24 (tap-hold-press 200 200 bspc lsft))
+  t5 (multi f24 (tap-hold-press 200 200 esc (layer-toggle sym)))
+  t6 (multi f24 (tap-hold-press 200 200 ret lalt))
 
   : S-;
   _ S--
@@ -48,41 +43,28 @@
   } S-]
   < S-,
   > S-.
-
-  nav (layer-toggle nav)
-
-  l0 (layer-switch main)
-  l1 (layer-switch engram)
-)
-
-(deflayer main
-  del  q    w    e    r    t    y    u    i    o    p
-  tab  a    s    d    f    g    h    j    k    l    ;
-  lsft z    x    c    v    b    n    m    ,    .    /
-
-  @l1  @lm  @lc           @ss            @rs  @na
 )
 
 (deflayer engram
-  XX   b    y    o    u    esc  bspc l    d    w    v
-  XX   c    i    e    a    tab  ret  h    t    s    n
-  g    x    j    k    z    XX   q    r    m    f    p
+  @t5  b    y    o    u    XX   XX    l    d    w    v    @t5
+  z    c    i    e    a    XX   XX    h    t    s    n    q
+  g    x    j    k    XX   XX   XX    r    m    f    p
 
-  @l0  @lm  @lc           @ss            @rs  @na
-)
-
-(deflayer sym
-  XX   \    @*   -    @+   @@   @#   ;    @:   @qo  @!
-  XX   /    @&   =    @_   `    @|   ,    .    '    @?
-  [    @<   @{  @pl   @$   XX   @%   @pr  @}   @>   ]
-
-  _    @lm  @lc           @ss            @rs  @na
+        @t1  @t3           @t2            @t4  @t6
 )
 
 (deflayer nav
-  XX   5    6    7    8    9    del  pgdn up    pgup ins
-  XX   0    1    2    3    4    home lft  down  rght end
-  @lm  @la  @lc  @ls  .    XX   @^   @rs  @rc   @ra  @rm
+  @t5  @*   home up   end  XX   XX    1    2    3    @+   @t5
+  XX   XX   left down rght XX   XX    4    5    6    0    XX
+  \    pgup XX   pgdn XX   XX   XX    7    8    9    .
 
-  _    @lm  @lc           @ss            @rs  @na
+        @t1  @t3           @t2            @t4  @t6
+  )
+
+(deflayer sym
+  @t5  @|   @#   @&   `    XX   XX    ;    @:   @qo  @!    @t5
+  XX   /    -    =    @_   XX   XX    ,    .    '    @?    XX
+  [    @<   @{  @pl   XX   XX   XX    @pr  @}   @>   ]
+
+        @t1  @t3           @t2            @t4  @t6
 )

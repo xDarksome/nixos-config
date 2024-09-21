@@ -20,8 +20,8 @@ s = "move_char_right"
 y = "goto_first_nonwhitespace"
 u = "goto_line_end"
 
-"*" = "goto_file_start"
-"@" = "goto_last_line"
+"{" = "goto_file_start"
+":" = "goto_last_line"
 
 l = "insert_mode"
 w = "append_mode"
@@ -32,24 +32,23 @@ esc = ":write"
 c = "change_selection"
 j = ":clipboard-yank"
 k = ":clipboard-paste-after"
-"(" = ":clipboard-paste-replace"
-K = ":clipboard-paste-replace"
+">" = ":clipboard-paste-replace"
 backspace = "delete_selection"
 x = [":clipboard-yank", "delete_selection"]
 g = "undo"
 G = "redo"
 
 "p" = "search"
-"P" = "global_search"
+"/" = "global_search"
 
 # shared
 
 "tab" = "indent"
-"S-tab" = "unindent"
+"#" = "unindent"
 "ret" = ["add_newline_below", "move_line_down"]
 
-">" = "search_next"
-")" = "search_prev"
+"(" = "search_prev"
+"*" = "search_next"
 
 "v" = "command_mode"
 
@@ -61,10 +60,10 @@ r = "jump_backward"
 "H" = "file_picker_in_current_directory"
 
 "=" = "code_action"
-"}" = "rename_symbol"
+")" = "rename_symbol"
 "?" = "last_picker"
-":" = "diagnostics_picker"
-D = "workspace_diagnostics_picker"
+"'" = "diagnostics_picker"
+"\"" = "workspace_diagnostics_picker"
 "q" = ":quit"
 "C-q" = ":q!"
 
@@ -83,13 +82,13 @@ s = "extend_char_right"
 
 u = "extend_to_line_end"
 
-"*" = "select_all"
-"@" = "select_all"
+"{" = "select_all"
+":" = "select_all"
 
 c = "change_selection"
 j = [":clipboard-yank", "normal_mode", "collapse_selection"]
 k = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
-"(" = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
+">" = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
 K = [":clipboard-paste-replace", "normal_mode", "collapse_selection"]
 backspace = ["delete_selection", "normal_mode"]
 x = [":clipboard-yank", "delete_selection", "normal_mode"]
@@ -99,11 +98,11 @@ space = ["normal_mode", "collapse_selection"]
 # shared
 
 "tab" = "indent"
-"S-tab" = "unindent"
+"#" = "unindent"
 "ret" = ["add_newline_below", "move_line_down"]
 
-">" = "search_next"
-")" = "search_prev"
+"(" = "search_prev"
+"*" = "search_next"
 
 "v" = "command_mode"
 
@@ -115,10 +114,10 @@ r = "jump_backward"
 "H" = "file_picker_in_current_directory"
 
 "=" = "code_action"
-"}" = "rename_symbol"
+")" = "rename_symbol"
 "?" = "last_picker"
-":" = "diagnostics_picker"
-D = "workspace_diagnostics_picker"
+"'" = "diagnostics_picker"
+"\"" = "workspace_diagnostics_picker"
 "q" = ":quit"
 "C-q" = ":q!"
 
