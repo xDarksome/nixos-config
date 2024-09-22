@@ -1,6 +1,4 @@
 {
-  description = "NixOS configuration flake";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-cosmic = {
@@ -11,9 +9,6 @@
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # cosmic-comp.url = "github:xDarksome/cosmic-comp/updated-upstream";
-    # cosmic-comp.inputs.nixpkgs.follows = "nixpkgs";
-    # cosmic-launcher.url = "github:xDarksome/cosmic-launcher";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
