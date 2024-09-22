@@ -14,6 +14,7 @@
     ./sway/mod.nix
 
     ./nix-bitcoin/mod.nix
+    ./monero/mod.nix
 
     ./cosmic/mod.nix
   ];
@@ -26,9 +27,9 @@
       package = pkgs.mullvad-vpn;
     };
     udev.packages = with pkgs; [
-      # bazecor 
+      # bazecor
       android-udev-rules
-    ]; 
+    ];
     udev.extraRules = ''
       KERNEL=="hidraw*", ATTRS{idVendor}=="d13e", ATTRS{idProduct}=="cc10", GROUP="plugdev", MODE="0666", SYMLINK+="coldcard"
     '';
@@ -44,7 +45,7 @@
 
   systemd.services."user@".serviceConfig.Delegate = ["cpu" "cpuset" "io" "memory" "pids"];
   systemd.user.services."stalker" = {
-    after = [ "network.target" ];
+    after = ["network.target"];
     serviceConfig = {
       ExecStart = "/home/${username}/.cargo/bin/stalker-bin";
     };
@@ -60,16 +61,16 @@
   };
 
   networking.firewall = {
-    enable = true;   
-    allowedTCPPorts = [ 6666 ];
-    allowedUDPPorts = [ 3000 3010 ];
+    enable = true;
+    allowedTCPPorts = [6666];
+    allowedUDPPorts = [3000 3010];
   };
   networking.nftables.enable = true;
 
   services.xserver = {
-    layout = "us,ru";
-    xkbVariant = "";
-    xkbOptions = "grp:win_space_toggle";
+    xkb.layout = "us,ru";
+    xkb.variant = "";
+    xkb.options = "grp:win_space_toggle";
     videoDrivers = ["nvidia"];
   };
 
@@ -123,7 +124,6 @@
     qbittorrent
 
     electrum
-    monero-gui
 
     flameshot
 
@@ -147,8 +147,8 @@
     #           'checkUdev=()=>{try{if(c.default.existsSync(f))return c.default.readFileSync(f,"utf-8").trim()===l.trim()}catch(e){console.error(e)}return!1}' \
     #           'checkUdev=()=>{return 1}'
     #     '';
-    #   };           
-      
+    #   };
+
     # })
 
     # (looking-glass-client.overrideAttrs {
@@ -162,7 +162,7 @@
     # })
 
     # virt manager is broken without this
-    gnome3.adwaita-icon-theme # default gnome cursors
+    # gnome3.adwaita-icon-theme # default gnome cursors
     glib
   ];
 
@@ -195,8 +195,8 @@
     fira-code
   ];
 
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = false;

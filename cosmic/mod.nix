@@ -5,11 +5,11 @@
   ...
 }: {
   imports = [
-     inputs.nixos-cosmic.nixosModules.default
+    inputs.nixos-cosmic.nixosModules.default
   ];
 
   services = {
     displayManager.cosmic-greeter.enable = true;
-    desktopManager.cosmic.enable = true; 
+    desktopManager.cosmic.enable = true;
   };
 }

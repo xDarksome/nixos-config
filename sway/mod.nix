@@ -67,7 +67,7 @@
           "${mod}+Alt+s" = "move right";
           "${mod}+Alt+d" = "move up";
           "${mod}+Alt+m" = "move down";
-          
+
           "${mod}+n" = "exec wezterm";
           "${mod}+b" = "kill";
           "${mod}+c" = "exec dmenu_path | dmenu | xargs swaymsg exec --";
@@ -93,7 +93,7 @@
           "${mod}+Alt+x" = "move container to workspace number 7";
           "${mod}+Alt+j" = "move container to workspace number 8";
           "${mod}+Alt+k" = "move container to workspace number 9";
-       };
+        };
 
         bars = [
           {
