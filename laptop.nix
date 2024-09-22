@@ -46,6 +46,7 @@
   systemd.services."user@".serviceConfig.Delegate = ["cpu" "cpuset" "io" "memory" "pids"];
   systemd.user.services."stalker" = {
     after = ["network.target"];
+    wantedBy = ["default.target"];
     serviceConfig = {
       ExecStart = "/home/${username}/.cargo/bin/stalker-bin";
     };
