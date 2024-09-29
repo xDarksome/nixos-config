@@ -83,6 +83,7 @@
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = ["docker" "libvirtd"];
+    shell = pkgs.nushell;
   };
 
   users.users.docker = {
