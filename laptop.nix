@@ -92,8 +92,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    rust-analyzer
-    rustup
+    # rust-analyzer
+    # rustup
+
+    alacritty
 
     brightnessctl
     zoxide
@@ -125,7 +127,7 @@
     mpv
     qbittorrent
 
-    electrum
+    # electrum
 
     flameshot
 

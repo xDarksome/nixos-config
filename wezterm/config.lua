@@ -26,4 +26,6 @@ config.enable_csi_u_key_encoding = true;
 
 config.enable_wayland = true;
 
+config.front_end="WebGpu" 
+
 return config
