@@ -13,34 +13,34 @@
   };
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  #  boot = {
-  #     initrd.kernelModules = [
-  #       "vfio_pci"
-  #       "vfio"
-  #       "vfio_iommu_type1"
+  boot = {
+      initrd.kernelModules = [
+        # "vfio_pci"
+        # "vfio"
+        # "vfio_iommu_type1"
 
-  #       "kvmfr"
+        # "kvmfr"
 
-  #       # "vfio_virqfd"
+        # "vfio_virqfd"
 
-  #       # "nvidia"
-  #       # "nvidia_modeset"
-  #       # "nvidia_uvm"
-  #       # "nvidia_drm"
-  #     ];
+        # "nvidia"
+        # "nvidia_modeset"
+        # "nvidia_uvm"
+        # "nvidia_drm"
+      ];
 
   #     extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
 
-  #     kernelParams = [
-  #       # enable IOMMU
-  #       "intel_iommu=on"
+      kernelParams = [
+        # enable IOMMU
+        # "intel_iommu=on"
 
-  #       # isolate the GPU
-  #       "vfio-pci.ids=01:00.0,01:00.1"
+        # isolate the GPU
+        # "vfio-pci.ids=01:00.0,01:00.1"
 
-  #       "kvmfr.static_size_mb=64"
-  #     ];
-  #   };
+        # "kvmfr.static_size_mb=64"     
+      ];
+    };
 
   # virtualisation.spiceUSBRedirection.enable = true;
 
@@ -63,7 +63,7 @@
     powerManagement.enable = true;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = true;
+    # powerManagement.finegrained = true;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
@@ -81,16 +81,16 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.beta;
 
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+    # prime = {
+    #   offload = {
+    #     enable = true;
+    #     enableOffloadCmd = true;
+    #   };
 
-      # Make sure to use the correct Bus ID values for your system!
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
+    #   # Make sure to use the correct Bus ID values for your system!
+    #   intelBusId = "PCI:0:2:0";
+    #   nvidiaBusId = "PCI:1:0:0";
+    # };
   };
 
   hardware.graphics.enable32Bit = true;

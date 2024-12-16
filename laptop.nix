@@ -37,8 +37,13 @@
   };
 
   programs = {
-    steam.enable = true;
     virt-manager.enable = true;
+    hyprland.enable = true;
+  };
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
   };
 
   security.polkit.enable = true;
@@ -51,14 +56,14 @@
       ExecStart = "/home/${username}/.cargo/bin/stalker-bin";
     };
     environment = {
-      RUST_LOG = "info,sqlx=warn";
+      RUST_LOG = "info,sqlx=error";
       DATA_DIR = "/home/${username}/stalker-data";
     };
   };
 
   networking.wireless = {
     enable = false; # Enables wireless support via wpa_supplicant.
-    iwd.enable = true;
+    # iwd.enable = true;
   };
 
   networking.firewall = {
@@ -95,7 +100,7 @@
     # rust-analyzer
     # rustup
 
-    alacritty
+    # alacritty
 
     brightnessctl
     zoxide
@@ -127,7 +132,7 @@
     mpv
     qbittorrent
 
-    # electrum
+    electrum
 
     flameshot
 
