@@ -36,6 +36,14 @@
     blueman.enable = true;
   };
 
+  services.navidrome = {
+    enable = true;
+    settings = {
+      MusicFolder = "/home/${username}/sync/music";
+    };
+  };
+  systemd.services.navidrome.serviceConfig.ProtectHome = lib.mkForce false;
+
   programs = {
     virt-manager.enable = true;
     hyprland.enable = true;
