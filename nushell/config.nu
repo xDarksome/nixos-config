@@ -526,7 +526,7 @@ alias kp = keepassxc-cli
 alias dev = nix develop --command "nu"
 alias gu = gitui
 alias ga = git add -A
-alias gc = git commit -m
+alias gc = git commit -S -m
 
 alias f = xplr
 alias bm = btm
