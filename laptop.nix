@@ -62,6 +62,7 @@
     wantedBy = ["default.target"];
     serviceConfig = {
       ExecStart = "/home/${username}/.cargo/bin/stalker-bin";
+      LimitNOFILE = 65536;
     };
     environment = {
       RUST_LOG = "info,sqlx=error";
