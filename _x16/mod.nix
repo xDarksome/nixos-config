@@ -14,33 +14,33 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot = {
-      initrd.kernelModules = [
-        # "vfio_pci"
-        # "vfio"
-        # "vfio_iommu_type1"
+    initrd.kernelModules = [
+      # "vfio_pci"
+      # "vfio"
+      # "vfio_iommu_type1"
 
-        # "kvmfr"
+      # "kvmfr"
 
-        # "vfio_virqfd"
+      # "vfio_virqfd"
 
-        # "nvidia"
-        # "nvidia_modeset"
-        # "nvidia_uvm"
-        # "nvidia_drm"
-      ];
+      # "nvidia"
+      # "nvidia_modeset"
+      # "nvidia_uvm"
+      # "nvidia_drm"
+    ];
 
-  #     extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
+    #     extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
 
-      kernelParams = [
-        # enable IOMMU
-        # "intel_iommu=on"
+    kernelParams = [
+      # enable IOMMU
+      # "intel_iommu=on"
 
-        # isolate the GPU
-        # "vfio-pci.ids=01:00.0,01:00.1"
+      # isolate the GPU
+      # "vfio-pci.ids=01:00.0,01:00.1"
 
-        # "kvmfr.static_size_mb=64"     
-      ];
-    };
+      # "kvmfr.static_size_mb=64"
+    ];
+  };
 
   # virtualisation.spiceUSBRedirection.enable = true;
 
