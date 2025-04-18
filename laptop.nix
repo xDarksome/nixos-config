@@ -28,6 +28,7 @@
     };
     udev.packages = with pkgs; [
       # bazecor
+      qmk-udev-rules
       android-udev-rules
     ];
     udev.extraRules = ''
@@ -146,6 +147,7 @@
     flameshot
 
     kanata
+    qmk
 
     # (bazecor.overrideAttrs {
     #  src = pkgs.appimageTools.extract {
