@@ -529,7 +529,7 @@ alias ga = git add -A
 alias gc = git commit -S -m
 
 alias f = xplr
-alias bm = btm
+alias t = btop
 
 alias zspotify = docker run -v /home/darksome/.zspotify:/root/.zspotify -v /home/darksome/sync/music:/root/Music -it zspotify:local -md /root/Music
 

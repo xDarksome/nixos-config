@@ -41,7 +41,7 @@
 
     dua
 
-    bottom
+    btop
   ];
 
   nix = {
