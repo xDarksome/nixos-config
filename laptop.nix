@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   inputs,
   pkgs,
   username,
@@ -35,6 +36,30 @@
       KERNEL=="hidraw*", ATTRS{idVendor}=="d13e", ATTRS{idProduct}=="cc10", GROUP="plugdev", MODE="0666", SYMLINK+="coldcard"
     '';
     blueman.enable = true;
+  };
+
+  services.rtorrent = {
+    enable = true;
+    downloadDir = "/var/lib/rtorrent/torrents";
+  };
+
+  services.flood = {
+    enable = true;
+    port = 7422;
+    extraArgs = ["--allowedpath /var/lib/rtorrent/torrents --rtsocket=${config.services.rtorrent.rpcSocket}"];
+  };
+
+  systemd.services.rtorrent = {
+    serviceConfig = {
+      ExecStartPre = lib.mkAfter [''${pkgs.bash}/bin/bash -c "mkdir -p torrents"''];
+    };
+  };
+
+  systemd.services.flood = {
+    serviceConfig = {
+      SupplementaryGroups = ["rtorrent"];
+      ReadWritePaths = ["/var/lib/rtorrent/torrents"];
+    };
   };
 
   services.navidrome = {
@@ -97,7 +122,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["docker" "libvirtd"];
+    extraGroups = ["docker" "libvirtd" "rtorrent"];
     shell = pkgs.nushell;
   };
 
