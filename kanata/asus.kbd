@@ -12,13 +12,12 @@
 
 ;; multi f24 hack: https://github.com/jtroo/kanata/discussions/422
 (defalias
-  t1 (multi f24 (tap-hold-press 200 200 tab lmet))
-  t2 (multi f24 (tap-hold-press 200 200 spc (layer-toggle nav)))
-  t3 (multi f24 (tap-hold-press 200 200 del lctl))
+  t1 (multi f24 (tap-hold-press 200 200 del (layer-toggle nav)))
+  t2 (multi f24 (tap-hold-press 200 200 tab lmet))
+  t3 (multi f24 (tap-hold-press 200 200 spc lsft))
 
-  t4 (multi f24 (tap-hold-press 200 200 bspc lsft))
-  t5 (multi f24 (tap-hold-press 200 200 esc (layer-toggle sym)))
-  t6 (multi f24 (tap-hold-press 200 200 ret lalt))
+  t4 (multi f24 (tap-hold-press 200 200 esc (layer-toggle sym)))
+  t5 (multi f24 (tap-hold-press 200 200 bspc lctl))
 
   : S-;
   _ S--
@@ -46,25 +45,25 @@
 )
 
 (deflayer engram
-  @t5  b    y    o    u    XX   XX    l    d    w    v    @t5
+  XX   b    y    o    u    XX   XX    l    d    w    v    XX
   z    c    i    e    a    XX   XX    h    t    s    n    q
   g    x    j    k    XX   XX   XX    r    m    f    p
 
-        @t1  @t3           @t2            @t4  @t6
+        @t1  @t2           @t3            @t4  @t5
 )
 
 (deflayer nav
-  @t5  @*   home up   end  XX   XX    1    2    3    @+   @t5
-  XX   XX   left down rght XX   XX    4    5    6    0    XX
-  \    pgup XX   pgdn XX   XX   XX    7    8    9    .
+  XX   del  home up   end  XX   XX    1    2    3    bspc XX
+  XX   tab  left down rght XX   XX    4    5    6    ret  XX
+  spc  pgup XX   pgdn XX   XX   XX    7    8    9    esc
 
-        @t1  @t3           @t2            @t4  @t6
+        @t1  @t2           0               @t4  @t5
   )
 
 (deflayer sym
-  @t5  @|   @#   @&   `    XX   XX    ;    @:   @qo  @!    @t5
-  XX   /    -    =    @_   XX   XX    ,    .    '    @?    XX
-  [    @<   @{  @pl   XX   XX   XX    @pr  @}   @>   ]
+  XX  @|   @&   @{    @}   XX   XX    [    ]    `    @!    XX
+  XX   =   @qo  @:    ;    XX   XX    ,    .    '    @?    XX
+  -   @+   @<   @>    XX   XX   XX    @pl  @pr  @*   /
 
-        @t1  @t3           @t2            @t4  @t6
+        @@   @#            @_              @t4  @t5
 )
