@@ -55,10 +55,6 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-27.3.11"
-  ];
-
   # The state versions are required and should stay at the version you
   # originally installed.
   system.stateVersion = "22.05";

@@ -30,7 +30,6 @@
       package = pkgs.mullvad-vpn;
     };
     udev.packages = with pkgs; [
-      # bazecor
       qmk-udev-rules
       android-udev-rules
     ];
@@ -48,11 +47,6 @@
   };
   systemd.services.navidrome.serviceConfig.ProtectHome = lib.mkForce false;
 
-  programs = {
-    virt-manager.enable = true;
-    hyprland.enable = true;
-  };
-
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -60,7 +54,6 @@
 
   security.polkit.enable = true;
 
-  systemd.services."user@".serviceConfig.Delegate = ["cpu" "cpuset" "io" "memory" "pids"];
   systemd.user.services."stalker" = {
     after = ["network.target"];
     wantedBy = ["default.target"];
@@ -76,7 +69,6 @@
 
   networking.wireless = {
     enable = false; # Enables wireless support via wpa_supplicant.
-    # iwd.enable = true;
   };
 
   networking.firewall = {
@@ -98,7 +90,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["docker" "libvirtd"];
+    extraGroups = ["docker"];
     shell = pkgs.nushell;
   };
 
@@ -108,38 +100,15 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # rust-analyzer
-    # rustup
-
-    # alacritty
-
-    brightnessctl
     zoxide
 
-    keepassxc
     firefox
     mullvad-browser
     mullvad-vpn
     chromium
     tor-browser-bundle-bin
 
-    session-desktop
-
-    pulsemixer
-    # termusic
-
-    mako
-    sway
-    swaybg
-    swaylock
-    swayidle
-    grim # screenshot functionality
-    slurp # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    swww
-
     logseq
-
     mpv
 
     electrum
@@ -148,42 +117,6 @@
 
     kanata
     qmk
-
-    # (bazecor.overrideAttrs {
-    #  src = pkgs.appimageTools.extract {
-    #     pname = "bazecor";
-    #     version = "1.4.0-rc.3";
-
-    #     src = fetchurl {
-    #       url = "https://github.com/Dygmalab/Bazecor/releases/download/v1.4.0-rc.3/Bazecor-1.4.0-rc.3-x64.AppImage";
-    #       hash = "sha256-ojAVBNSknOvh8L4dqkoxHw3aYoWr0Wb81kVptNVCC3o=";
-    #     };
-
-    #     # Workaround for https://github.com/Dygmalab/Bazecor/issues/370
-    #     postExtract = ''
-    #       substituteInPlace \
-    #         $out/usr/lib/bazecor/resources/app/.webpack/main/index.js \
-    #         --replace \
-    #           'checkUdev=()=>{try{if(c.default.existsSync(f))return c.default.readFileSync(f,"utf-8").trim()===l.trim()}catch(e){console.error(e)}return!1}' \
-    #           'checkUdev=()=>{return 1}'
-    #     '';
-    #   };
-
-    # })
-
-    # (looking-glass-client.overrideAttrs {
-    #   src = fetchFromGitHub {
-    #     owner = "gnif";
-    #     repo = "LookingGlass";
-    #     rev = "B6-rc1";
-    #     sha256 = "sha256-FZjwLY2XtPGhwc/GyAAH2jvFOp61lSqXqXjz0UBr7uw=";
-    #     fetchSubmodules = true;
-    #   };
-    # })
-
-    # virt manager is broken without this
-    # gnome3.adwaita-icon-theme # default gnome cursors
-    glib
   ];
 
   services.pipewire = {
@@ -196,19 +129,6 @@
 
   virtualisation.docker = {
     enable = true;
-  };
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.verbatimConfig = ''
-      cgroup_device_acl = [
-          "/dev/null", "/dev/full", "/dev/zero",
-          "/dev/random", "/dev/urandom",
-          "/dev/ptmx", "/dev/kvm", "/dev/kqemu",
-          "/dev/rtc","/dev/hpet", "/dev/vfio/vfio",
-
-          "/dev/kvmfr0"
-      ]
-    '';
   };
 
   fonts.packages = with pkgs; [
