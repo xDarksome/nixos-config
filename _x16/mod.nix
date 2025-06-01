@@ -94,7 +94,6 @@
   };
 
   hardware.graphics.enable32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
 
   # boot.extraModprobeConfig = ''
   #   blacklist nouveau

@@ -4,14 +4,13 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.nixos-cosmic.nixosModules.default
-  ];
-
   services = {
     displayManager.cosmic-greeter.enable = true;
-    desktopManager.cosmic.enable = true;
+    desktopManager.cosmic = {
+      enable = true;
+      xwayland.enable = false;
+    };
   };
 
-  environment.cosmic.excludePackages = with pkgs; [cosmic-wallpapers cosmic-player];
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = "true";
 }

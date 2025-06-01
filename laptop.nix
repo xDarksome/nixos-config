@@ -20,6 +20,8 @@
     ./qbittorrent
 
     ./cosmic/mod.nix
+
+    ./mpv
   ];
 
   boot.supportedFilesystems = ["ntfs"];
@@ -83,11 +85,6 @@
     videoDrivers = ["nvidia"];
   };
 
-  services.gnome = {
-    gnome-keyring.enable = true;
-    tracker-miners.enable = true;
-  };
-
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = ["docker"];
@@ -109,7 +106,6 @@
     tor-browser-bundle-bin
 
     logseq
-    mpv
 
     electrum
 
@@ -139,5 +135,5 @@
   hardware.graphics.enable32Bit = true;
 
   hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = false;
+  # hardware.pulseaudio.enable = false;
 }
