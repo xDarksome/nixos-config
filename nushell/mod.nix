@@ -3,7 +3,20 @@
   username,
   ...
 }: {
-  environment.systemPackages = with pkgs; [nushell];
+  environment.systemPackages = with pkgs; [
+    nushell
+
+    (writeShellApplication {
+      name = "derive-password";
+
+      runtimeInputs = [
+        libargon2
+        wl-clipboard-rs
+      ];
+
+      text = ''nu ${./derive-password.nu} "$@"'';
+    })
+  ];
 
   home-manager.users.${username}.home.file = {
     ".config/nushell/config.nu".source = ./config.nu;
