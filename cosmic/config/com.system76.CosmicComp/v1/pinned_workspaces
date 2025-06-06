@@ -22,5 +22,17 @@
 	(
 		output: ( name: "", edid: None ),
 		tiling_enabled: true,
+	),
+	(
+		output: ( name: "", edid: None ),
+		tiling_enabled: true,
+	),
+	(
+		output: ( name: "", edid: None ),
+		tiling_enabled: true,
+	),
+	(
+		output: ( name: "", edid: None ),
+		tiling_enabled: true,
 	)
 ]
