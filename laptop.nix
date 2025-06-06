@@ -109,8 +109,6 @@
 
     electrum
 
-    flameshot
-
     kanata
     qmk
   ];
@@ -135,5 +133,4 @@
   hardware.graphics.enable32Bit = true;
 
   hardware.bluetooth.enable = true;
-  # hardware.pulseaudio.enable = false;
 }
