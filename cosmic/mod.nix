@@ -13,4 +13,9 @@
   };
 
   environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = "true";
+
+  system.activationScripts.symlinks.text = lib.mkAfter ''
+    rm -rf /home/${username}/.config/cosmic
+    ln -s /home/${username}/nixos-config/cosmic/config /home/${username}/.config/cosmic
+  '';
 }
