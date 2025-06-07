@@ -1,2 +1,5 @@
-qbittorrent/config/qBittorrent-data.conf
+qbittorrent/config/*
+!qbittorrent/config/qBittorrent.conf
+!qbittorrent/config/*.qbtheme
+
 result
