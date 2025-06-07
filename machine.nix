@@ -39,6 +39,9 @@
     dua
 
     btop
+
+    restic
+    rclone
   ];
 
   nix = {
