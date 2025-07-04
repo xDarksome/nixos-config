@@ -55,6 +55,11 @@
         modules = [./_x16/mod.nix];
       };
 
+      pc = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [./_pc];
+      };
+
       # nixos-anywhere --flake .#generic-nixos-facter --generate-hardware-config nixos-facter _vps/facter.json <hostname>
       vps = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
