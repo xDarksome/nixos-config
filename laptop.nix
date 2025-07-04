@@ -10,6 +10,9 @@
   imports = [
     ./machine.nix
 
+    inputs.microvm.nixosModules.host
+    ./sops
+
     ./kanata/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
@@ -17,14 +20,34 @@
     ./nix-bitcoin/mod.nix
     ./monero/mod.nix
 
+    ./glance
+
     ./qbittorrent
 
     ./cosmic/mod.nix
 
+    ./chromium
+
     ./mpv
+
+    ./syncthing/mod.nix
   ];
 
   boot.supportedFilesystems = ["ntfs"];
+  boot.kernelModules = ["i2c-dev"];
+
+  services.tor = {
+    # enable = true;
+    # settings = {
+    #   HiddenServiceDir = "/var/lib/tor/test-service/";
+    #   HiddenServicePort = "3000 127.0.0.1:3000";
+    # };
+    
+    relay.onionServices.test = {
+      path = "/var/lib/tor/test-service/";
+      map = [3000];
+    };
+  };
 
   services = {
     mullvad-vpn = {
@@ -53,6 +76,8 @@
     enable = true;
     gamescopeSession.enable = true;
   };
+
+  programs.hyprland.enable = true;
 
   security.polkit.enable = true;
 
@@ -97,12 +122,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    zoxide
-
     firefox
     mullvad-browser
     mullvad-vpn
-    chromium
     tor-browser-bundle-bin
 
     logseq
@@ -111,7 +133,14 @@
 
     kanata
     qmk
+
+    restic
+    rclone
   ];
+
+  sops = {
+    age.keyFile = "/home/${username}/sync/keys/nixos-config.age";
+  };
 
   services.pipewire = {
     enable = true;

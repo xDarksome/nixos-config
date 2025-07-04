@@ -518,6 +518,9 @@ $env.config = {
   ]
 }
 
+alias j = hx ~/sync/brain/journals/(date now | format date %Y_%m_%d).md
+alias jj = hx ~/sync/brain/journals/(date now | date to-timezone local | $in - 1day | format date %Y_%m_%d).md 
+ 
 alias kp = keepassxc-cli
 alias dev = nix develop --command "nu"
 alias gu = gitui
