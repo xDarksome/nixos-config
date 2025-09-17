@@ -16,6 +16,12 @@
     channels = [
       # Gamer Nexus
       "UChIs72whgZI9w6d6FhwGGHA"
+      # Economics Explained
+      "UCZ4AMrDcNrfy3X6nsU8-rPg"
+      # Argon
+      "UCrKxBYp0AGIQLJRIFk8_ZtQ"
+      # Kraut
+      "UCr_Q-bPpcw5fJ-Oow1BW1NQ"
     ];
     collapse-after = -1;
   };
@@ -31,8 +37,18 @@
 
       {url = "https://spectrum-os.org/lists/archives/spectrum-discuss/new.atom";}
 
+      # {url = "https://monero.observer/feed-mini.xml";}
       {url = "https://monerica.com/rss/feed.xml";}
       {url = "https://blog.cakewallet.com/feed";}      
+      {url = "https://serai.exchange/feed";}      
+  
+      {url = "https://kbd.news/rss2.php";}      
+
+      {url = "https://liliputing.com/feed";}
+
+      {url = "https://linmob.net/feed.xml";}
+
+      {url = "https://www.nushell.sh/rss";}
     ];
     collapse-after = -1;
   };

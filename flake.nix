@@ -15,11 +15,6 @@
       flake = false;
     };
 
-    microvm = {
-      url = "github:xDarksome/microvm.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
@@ -64,38 +59,29 @@
       vps = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [./_vps];
-      }; 
-
-      # my-microvm = nixpkgs.lib.nixosSystem {
-      #   inherit system specialArgs;
-
-      #   modules = [
-      #     inputs.microvm.nixosModules.microvm
-      #     ./vm.nix
-      #   ];
-
-      #   specialArgs = {
-      #     inherit username system inputs;
-      #   };
-      # };
+      };
     };
 
     packages.${system} = {
-      my-microvm = self.nixosConfigurations.my-microvm.config.microvm.declaredRunner;
       vps-iso = self.nixosConfigurations.vps.config.system.build.isoImage;
     };
     
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     devShells.x86_64-linux.default = pkgs.mkShell {
-      buildInputs = with pkgs; [nixos-anywhere
+      buildInputs = with pkgs; [
+        nixos-anywhere
 
+        # cloud-hypervisor
+        crosvm
+        alpine-make-rootfs
+        nix-bundle
+        pmbootstrap
 
-    (writeShellApplication {
-      name = "deploy-vps";
-      text = ''nu ${./deploy-vps.nu} ${username} ${vps_ip} "$@"'';
-    })
-
+        (writeShellApplication {
+          name = "deploy-vps";
+          text = ''nu ${./deploy-vps.nu} ${username} ${vps_ip} "$@"'';
+        })
       ];
     };
   };

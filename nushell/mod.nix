@@ -5,6 +5,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     nushell
+    nushellPlugins.formats
 
     (writeShellApplication {
       name = "derive-password";

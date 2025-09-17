@@ -6,14 +6,25 @@
   username,
   appimageTools,
   ...
-}: {
+}:
+let
+vmKernel = pkgs.linuxPackages_custom {
+  version = "6.12.41";
+  src = pkgs.fetchurl {
+    url = "mirror://kernel/linux/kernel/v6.x/linux-6.12.41.tar.xz";
+    sha256 = "sha256-axmjrplCPeJBaWTWclHXRZECd68li0xMY+iP2H2/Dic=";
+  };
+  configfile = ./kernel_config;
+}; 
+in {
   imports = [
     ./machine.nix
 
-    inputs.microvm.nixosModules.host
+    ./mullvad-vpn
+
     ./sops
 
-    ./kanata/mod.nix
+    # ./kanata/mod.nix
     ./wezterm/mod.nix
     ./sway/mod.nix
 
@@ -33,6 +44,27 @@
     ./syncthing/mod.nix
   ];
 
+  # networking.useNetworkd = true;
+  # only being used for VMs
+  # systemd.network.wait-online.enable = false;
+
+  # networking.useDHCP = false;
+  networking.networkmanager.enable = true;
+
+  # networking.wireless.enable = true;
+  # networking.wireless.userControlled.enable = true;
+  # networking.wireless.allowAuxiliaryImperativeNetworks = true;
+
+  boot.kernel.sysctl = {
+    # Enable IP forwarding
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
+  networking.firewall = {
+    enable = true;
+  };
+
   boot.supportedFilesystems = ["ntfs"];
   boot.kernelModules = ["i2c-dev"];
 
@@ -40,7 +72,7 @@
     # enable = true;
     # settings = {
     #   HiddenServiceDir = "/var/lib/tor/test-service/";
-    #   HiddenServicePort = "3000 127.0.0.1:3000";
+        #   HiddenServicePort = "3000 127.0.0.1:3000";
     # };
     
     relay.onionServices.test = {
@@ -60,6 +92,7 @@
     ];
     udev.extraRules = ''
       KERNEL=="hidraw*", ATTRS{idVendor}=="d13e", ATTRS{idProduct}=="cc10", GROUP="plugdev", MODE="0666", SYMLINK+="coldcard"
+      KERNELS=="input*", ATTRS{name}=="Asus Keyboard", ENV{LIBINPUT_IGNORE_DEVICE}="1"
     '';
     blueman.enable = true;
   };
@@ -94,15 +127,6 @@
     };
   };
 
-  networking.wireless = {
-    enable = false; # Enables wireless support via wpa_supplicant.
-  };
-
-  networking.firewall = {
-    enable = true;
-  };
-  networking.nftables.enable = true;
-
   services.xserver = {
     xkb.layout = "us,ru";
     xkb.variant = "";
@@ -112,13 +136,19 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["docker"];
+    extraGroups = ["docker" "dialout" "tty"];
     shell = pkgs.nushell;
   };
 
   users.users.docker = {
     isNormalUser = true;
     extraGroups = ["docker"];
+  };
+
+  environment.variables = {
+    "VM_KERNEL" = "${vmKernel.kernel}";
+    "VM_KERNEL_BIN" = "${config.boot.kernelPackages.kernel}/${config.system.boot.loader.kernelFile}";
+    "VM_KERNEL_INITRD" = "${config.system.build.initialRamdisk}/${config.system.boot.loader.initrdFile}";   
   };
 
   environment.systemPackages = with pkgs; [
@@ -131,7 +161,7 @@
 
     electrum
 
-    kanata
+    # kanata
     qmk
 
     restic

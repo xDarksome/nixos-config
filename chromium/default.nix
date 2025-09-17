@@ -26,15 +26,28 @@
   #   };
   # };
 
-  # sops.secrets.chromium-wg-quick = {
-  #   sopsFile = ./wg-quick.conf;
-  #   restartUnits = ["wg-quick-chromium.service"];
-  #   format = "binary";
+  sops.secrets.chromium-wg-quick = {
+    sopsFile = ./wg-quick.conf;
+    # restartUnits = ["wg-quick-chromium.service"];
+    format = "binary";
+  };
+
+  # networking.wireguard.interfaces = {
+  #   chromium = {
+  #     ips = ["10.2.0.2/32"];
+  #     peers = [{
+  #       allowedIPs = ["0.0.0.0/0"];
+  #       endpoint = "87.249.139.170:51820";
+  #       publicKey = "O9PuAgDUpgObhbFQYpWMiEoynWaCSmQuGTtBjcuEk3E=";
+  #     }];
+  #     privateKey = "";
+  #     interfaceNamespace = "vm1ns";
+  #   };
   # };
 
   # networking.wg-quick.interfaces.chromium = {
   #   configFile = config.sops.secrets.chromium-wg-quick.path;
-  #   autostart = false;
+  #   # autostart = false;
   # };
 
   # microvm.vms = {

@@ -3,3 +3,4 @@ qbittorrent/config/*
 !qbittorrent/config/*.qbtheme
 
 result
+target
