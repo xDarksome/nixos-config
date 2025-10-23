@@ -8,7 +8,7 @@
     format = "binary";
   };
 
-  networking.wg-quick.interfaces.mullvad-vpn = {
-    configFile = config.sops.secrets."mullvad-vpn-wg-quick".path;
-  };
+  # networking.wg-quick.interfaces.mullvad-vpn = {
+  #   configFile = config.sops.secrets."mullvad-vpn-wg-quick".path;
+  # };
 }

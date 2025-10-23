@@ -7,16 +7,10 @@
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-
-    ./nushell/mod.nix
-    ./git/mod.nix
-    ./gitui/mod.nix
-    ./helix/mod.nix
-    ./xplr/mod.nix
   ];
 
-  # networking.networkmanager.enable = true;
-  # networking.wireless.enable = false;
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = false;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -37,20 +31,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    zoxide
-
-    unixtools.whereis
-    wget
-    zip
-    unzip
-
-    gnupg
-    gpg-tui
-    pinentry-curses
-
-    dua
-
-    btop
+    home-manager
   ];
 
   nix = {

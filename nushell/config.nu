@@ -518,8 +518,17 @@ $env.config = {
   ]
 }
 
-alias j = hx ~/sync/brain/journals/(date now | format date %Y_%m_%d).md
-alias jj = hx ~/sync/brain/journals/(date now | date to-timezone local | $in - 1day | format date %Y_%m_%d).md 
+def j [date: string = ""] {
+  let date = if $date == "" {
+    date now
+  } else {
+    $date | date from-human
+  }
+
+  hx ~/sync/brain/journals/($date | format date %Y_%m_%d).md
+} 
+
+alias jj = j yesterday
  
 alias kp = keepassxc-cli
 alias dev = nix develop --command "nu"

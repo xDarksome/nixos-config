@@ -38,27 +38,51 @@
     };
 
     username = "darksome";
-    vps_ip = "82.153.138.117";
 
     specialArgs = {
       inherit inputs username vps_ip;
     };
+    extraSpecialArgs = specialArgs;
   in {
     nixosConfigurations = {
       x16 = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [./_x16/mod.nix];
       };
+    };
 
-      pc = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [./_pc];
+    homeConfigurations = {
+      x16 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs extraSpecialArgs;
+
+        modules = [
+          ./core.nix
+
+          ./sway
+          ./wezterm
+        ];
       };
 
-      # nixos-anywhere --flake .#generic-nixos-facter --generate-hardware-config nixos-facter _vps/facter.json <hostname>
-      vps = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [./_vps];
+      fp5 = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs extraSpecialArgs;
+
+        modules = [
+          ./core.nix
+
+          ./sway
+          ./wezterm
+        ];
+      };
+
+      pc = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs extraSpecialArgs;
+
+        modules = [
+          ./core.nix
+
+          ./sway
+          ./wezterm
+        ];
       };
     };
 
@@ -77,11 +101,6 @@
         alpine-make-rootfs
         nix-bundle
         pmbootstrap
-
-        (writeShellApplication {
-          name = "deploy-vps";
-          text = ''nu ${./deploy-vps.nu} ${username} ${vps_ip} "$@"'';
-        })
       ];
     };
   };

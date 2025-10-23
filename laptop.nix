@@ -8,14 +8,14 @@
   ...
 }:
 let
-vmKernel = pkgs.linuxPackages_custom {
-  version = "6.12.41";
-  src = pkgs.fetchurl {
-    url = "mirror://kernel/linux/kernel/v6.x/linux-6.12.41.tar.xz";
-    sha256 = "sha256-axmjrplCPeJBaWTWclHXRZECd68li0xMY+iP2H2/Dic=";
-  };
-  configfile = ./kernel_config;
-}; 
+# vmKernel = pkgs.linuxPackages_custom {
+#   version = "6.12.41";
+#   src = pkgs.fetchurl {
+#     url = "mirror://kernel/linux/kernel/v6.x/linux-6.12.41.tar.xz";
+#     sha256 = "sha256-axmjrplCPeJBaWTWclHXRZECd68li0xMY+iP2H2/Dic=";
+#   };
+#   configfile = ./kernel_config;
+# }; 
 in {
   imports = [
     ./machine.nix
@@ -25,8 +25,6 @@ in {
     ./sops
 
     # ./kanata/mod.nix
-    ./wezterm/mod.nix
-    ./sway/mod.nix
 
     ./nix-bitcoin/mod.nix
     ./monero/mod.nix
@@ -49,7 +47,7 @@ in {
   # systemd.network.wait-online.enable = false;
 
   # networking.useDHCP = false;
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = false;
 
   # networking.wireless.enable = true;
   # networking.wireless.userControlled.enable = true;
@@ -64,6 +62,7 @@ in {
   networking.firewall = {
     enable = true;
   };
+  networking.nftables.enable = true;
 
   boot.supportedFilesystems = ["ntfs"];
   boot.kernelModules = ["i2c-dev"];
@@ -146,9 +145,9 @@ in {
   };
 
   environment.variables = {
-    "VM_KERNEL" = "${vmKernel.kernel}";
-    "VM_KERNEL_BIN" = "${config.boot.kernelPackages.kernel}/${config.system.boot.loader.kernelFile}";
-    "VM_KERNEL_INITRD" = "${config.system.build.initialRamdisk}/${config.system.boot.loader.initrdFile}";   
+    # "VM_KERNEL" = "${vmKernel.kernel}";
+    # "VM_KERNEL_BIN" = "${config.boot.kernelPackages.kernel}/${config.system.boot.loader.kernelFile}";
+    # "VM_KERNEL_INITRD" = "${config.system.build.initialRamdisk}/${config.system.boot.loader.initrdFile}";   
   };
 
   environment.systemPackages = with pkgs; [
@@ -192,4 +191,17 @@ in {
   hardware.graphics.enable32Bit = true;
 
   hardware.bluetooth.enable = true;
+
+
+
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = [username];
+
+  virtualisation.libvirtd.enable = true;
+
+  virtualisation.spiceUSBRedirection.enable = true;
+
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+
 }
