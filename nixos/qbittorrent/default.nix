@@ -19,6 +19,6 @@
 
   system.activationScripts.symlinks.text = lib.mkAfter ''
     rm -rf /home/${username}/.config/qBittorrent
-    ln -s /home/${username}/nixos-config/qbittorrent/config /home/${username}/.config/qBittorrent
+    ln -s /home/${username}/nixos-config/nixos/qbittorrent/config /home/${username}/.config/qBittorrent
   '';
 }

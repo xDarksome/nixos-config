@@ -17,6 +17,6 @@
 
   system.activationScripts.symlinks.text = lib.mkAfter ''
     rm -rf /home/${username}/.config/cosmic
-    ln -s /home/${username}/nixos-config/cosmic/config /home/${username}/.config/cosmic
+    ln -s /home/${username}/nixos-config/nixos/cosmic/config /home/${username}/.config/cosmic
   '';
 }

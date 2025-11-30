@@ -30,11 +30,6 @@
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [
-        (final: super: {
-          cloud-hypervisor = import "${inputs.spectrum-os}/pkgs/cloud-hypervisor" {inherit final super;};
-        })
-      ];
     };
 
     username = "darksome";
@@ -47,64 +42,21 @@
     nixosConfigurations = {
       x16 = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
-        modules = [./_x16/mod.nix];
-      };
-
-      pc = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [./_pc];
+        modules = [./nixos/x16.nix];
       };
     };
 
     homeConfigurations = {
       x16 = home-manager.lib.homeManagerConfiguration {
         inherit pkgs extraSpecialArgs;
-
-        modules = [
-          ./core.nix
-
-          ./sway
-          ./wezterm
-        ];
+        modules = [./home-manager/x16.nix];
       };
-
-      fp5 = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-
-        modules = [
-          ./core.nix
-
-          ./sway
-          ./wezterm
-        ];
-      };
-
-      pc = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-
-        modules = [
-          ./core.nix
-
-          ./sway
-          ./wezterm
-        ];
-      };
-    };
-
-    packages.${system} = {
-      vps-iso = self.nixosConfigurations.vps.config.system.build.isoImage;
     };
     
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     devShells.x86_64-linux.default = pkgs.mkShell {
       buildInputs = with pkgs; [
-        nixos-anywhere
-
-        # cloud-hypervisor
-        crosvm
-        alpine-make-rootfs
-        nix-bundle
         pmbootstrap
       ];
     };
