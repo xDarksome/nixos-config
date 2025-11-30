@@ -1,6 +1,6 @@
-qbittorrent/config/*
-!qbittorrent/config/qBittorrent.conf
-!qbittorrent/config/*.qbtheme
+nixos/qbittorrent/config/*
+!nixos/qbittorrent/config/qBittorrent.conf
+!nixos/qbittorrent/config/*.qbtheme
 
 result
 target
