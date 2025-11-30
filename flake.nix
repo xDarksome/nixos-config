@@ -40,7 +40,7 @@
     username = "darksome";
 
     specialArgs = {
-      inherit inputs username vps_ip;
+      inherit inputs username;
     };
     extraSpecialArgs = specialArgs;
   in {
@@ -48,6 +48,11 @@
       x16 = nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules = [./_x16/mod.nix];
+      };
+
+      pc = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules = [./_pc];
       };
     };
 
