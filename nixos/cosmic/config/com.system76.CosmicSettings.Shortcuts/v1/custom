@@ -2,6 +2,48 @@
     (
         modifiers: [
             Super,
+        ],
+        key: "e",
+    ): Workspace(2),
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "j",
+    ): MoveToWorkspace(8),
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "o",
+    ): MoveToWorkspace(5),
+    (
+        modifiers: [],
+        key: "Print",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "t",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "slash",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "u",
+    ): Workspace(6),
+    (
+        modifiers: [
+            Super,
             Ctrl,
         ],
         key: "Escape",
@@ -10,9 +52,8 @@
         modifiers: [
             Super,
         ],
-        key: "n",
-        description: Some("term"),
-    ): Spawn("wezterm"),
+        key: "c",
+    ): System(Launcher),
     (
         modifiers: [
             Super,
@@ -24,60 +65,25 @@
         modifiers: [
             Super,
         ],
-        key: "e",
-    ): Workspace(2),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "t",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "u",
-    ): Workspace(6),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "o",
-    ): Workspace(5),
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "k",
-    ): MoveToWorkspace(9),
-    (
-        modifiers: [],
-        key: "Print",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "c",
-    ): System(Launcher),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "Escape",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "j",
-    ): Workspace(8),
+        key: "y",
+    ): Workspace(4),
     (
         modifiers: [
             Super,
         ],
     ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "b",
+    ): Close,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "l",
+    ): System(LockScreen),
     (
         modifiers: [
             Super,
@@ -88,21 +94,34 @@
         modifiers: [
             Super,
         ],
-        key: "slash",
+        key: "x",
+    ): Workspace(7),
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "k",
+    ): MoveToWorkspace(9),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Escape",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "g",
     ): Disable,
     (
         modifiers: [
             Super,
             Ctrl,
         ],
-        key: "x",
-    ): MoveToWorkspace(7),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "i",
-    ): Workspace(1),
+        key: "a",
+    ): MoveToWorkspace(3),
     (
         modifiers: [
             Super,
@@ -119,26 +138,6 @@
     (
         modifiers: [
             Super,
-            Ctrl,
-        ],
-        key: "j",
-    ): MoveToWorkspace(8),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "y",
-    ): Workspace(4),
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "a",
-    ): MoveToWorkspace(3),
-    (
-        modifiers: [
-            Super,
         ],
         key: "k",
     ): Workspace(9),
@@ -146,33 +145,8 @@
         modifiers: [
             Super,
         ],
-        key: "l",
-    ): System(LockScreen),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "b",
-    ): Close,
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "g",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "o",
-    ): MoveToWorkspace(5),
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "x",
-    ): Workspace(7),
+        key: "n",
+    ): System(Terminal),
     (
         modifiers: [
             Super,
@@ -183,8 +157,33 @@
     (
         modifiers: [
             Super,
+        ],
+        key: "j",
+    ): Workspace(8),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "o",
+    ): Workspace(5),
+    (
+        modifiers: [
+            Super,
             Ctrl,
         ],
         key: "y",
     ): MoveToWorkspace(4),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "i",
+    ): Workspace(1),
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "x",
+    ): MoveToWorkspace(7),
 }

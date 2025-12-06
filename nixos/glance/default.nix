@@ -22,6 +22,8 @@
       "UCrKxBYp0AGIQLJRIFk8_ZtQ"
       # Kraut
       "UCr_Q-bPpcw5fJ-Oow1BW1NQ"
+      # High Yield
+      "UCmMwHbw2j8LfvTKVh3O7Vdw"
     ];
     collapse-after = -1;
   };
@@ -48,7 +50,7 @@
 
       {url = "https://linmob.net/feed.xml";}
 
-      {url = "https://www.nushell.sh/rss";}
+      # {url = "https://www.nushell.sh/rss";}
     ];
     collapse-after = -1;
   };

@@ -126,7 +126,6 @@
     };
     udev.packages = with pkgs; [
       qmk-udev-rules
-      android-udev-rules
     ];
     udev.extraRules = ''
       KERNEL=="hidraw*", ATTRS{idVendor}=="d13e", ATTRS{idProduct}=="cc10", GROUP="plugdev", MODE="0666", SYMLINK+="coldcard"
@@ -194,9 +193,14 @@
     asusctl
 
     firefox
-    mullvad-browser
     mullvad-vpn
-    tor-browser-bundle-bin
+    tor-browser
+
+    # ffmpeg7 is broken
+    # TODO: remove once fixed
+    (mullvad-browser.override {
+      ffmpeg = ffmpeg_6;
+    })
 
     logseq
 
